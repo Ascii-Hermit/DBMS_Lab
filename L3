@@ -14,4 +14,10 @@ Q15>> SELECT course_id FROM section WHERE year = '2009' GROUP BY course_id HAVIN
 
 Q16>> SELECT id,name FROM student WHERE id IN (SELECT id FROM takes GROUP BY id HAVING COUNT(id)>1 AND student.dept_name = 'Comp. Sci.' );
 
-Q17>> 
+Q17>> SELECT dept_name, AVG(salary) FROM instructor GROUP BY dept_name HAVING AVG(salary)>42000;
+
+Q18>> CREATE VIEW all_courses AS SELECT building,room_number,semester,year FROM section WHERE course_id IN (SELECT course_id FROM course WHERE dept_name='Physics') AND semester = 'Fall' AND year = '2009';
+
+Q19>> SELECT * FROM all_courses;
+
+Q20>> CREATE VIEW department_total_salary AS SELECT dept_name,SUM(salary) FROM instructor GROUP BY dept_name;
