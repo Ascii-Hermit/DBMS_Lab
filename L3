@@ -1,3 +1,17 @@
 Q11>> SELECT dept_name,AVG(salary) FROM instructor GROUP BY dept_name ORDER BY AVG(salary) DESC;
 
 Q12>> SELECT dept_name FROM department WHERE budget < ALL(SELECT AVG(salary) FROM instructor);
+
+Q13>> SELECT course_id, title FROM course WHERE EXISTS (SELECT course_id FROM section 
+WHERE semester = 'Fall'  AND year = 2009 AND course.course_id = section.course_id)
+INTERSECT
+SELECT course_id, title FROM course WHERE EXISTS (SELECT course_id FROM section 
+WHERE semester = 'Spring' AND year = 2010 AND course.course_id = section.course_id);
+
+Q14>> SELECT name FROM student WHERE EXISTS (SELECT dept_name FROM course WHERE dept_name = 'Biology' AND student.dept_name = course.dept_name);
+
+Q15>> SELECT course_id FROM section WHERE year = '2009' GROUP BY course_id HAVING COUNT(year)=1;
+
+Q16>> SELECT id,name FROM student WHERE id IN (SELECT id FROM takes GROUP BY id HAVING COUNT(id)>1 AND student.dept_name = 'Comp. Sci.' );
+
+Q17>> 
